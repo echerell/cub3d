@@ -6,14 +6,14 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:38:26 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/24 23:22:45 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/26 22:51:00 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdio.h>
 
-void	rotate(t_world *world, double angle)
+static void	rotate(t_world *world, double angle)
 {
 	double	old_dir_x;
 	double	old_move_x;
@@ -22,11 +22,13 @@ void	rotate(t_world *world, double angle)
 	world->dir.x = world->dir.x * cos(angle) - world->dir.y * sin(angle);
 	world->dir.y = old_dir_x * sin(angle) + world->dir.y * cos(angle);
 	old_move_x = world->camera.plane_x;
-	world->camera.plane_x = world->camera.plane_x * cos(angle) - world->camera.plane_y * sin(angle);
-	world->camera.plane_y = old_move_x * sin(angle) + world->camera.plane_y * cos(angle);
+	world->camera.plane_x = world->camera.plane_x * cos(angle) - \
+	world->camera.plane_y * sin(angle);
+	world->camera.plane_y = old_move_x * sin(angle) + \
+	world->camera.plane_y * cos(angle);
 }
 
-void	move(t_world *world, int keycode, double speed)
+static void	move(t_world *world, int keycode, double speed)
 {
 	int		val;
 
@@ -50,7 +52,7 @@ void	move(t_world *world, int keycode, double speed)
 	}
 }
 
-int		key_event(int keycode, void *param)
+int	key_event(int keycode, void *param)
 {
 	if (keycode == KEY_ESC)
 	{
@@ -62,9 +64,9 @@ int		key_event(int keycode, void *param)
 	else if (keycode == KEY_S || keycode == KEY_A)
 		move(param, keycode, -0.5);
 	else if (keycode == KEY_ARR_RIGHT)
-		rotate(param, -0.05);
+		rotate(param, -0.1);
 	else if (keycode == KEY_ARR_LEFT)
-		rotate(param, 0.05);
+		rotate(param, 0.1);
 	draw(param);
 	return (1);
 }

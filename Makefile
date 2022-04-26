@@ -9,7 +9,8 @@ USR_INCLUDE = -I/usr/include
 USRLIB_FLAGS = -L/usr/lib -lXext -lX11 -lm
 
 SRCS_DIR = ./srcs/
-SRCS_FILES = cub3d.c key_event.c free.c init.c draw.c
+SRCS_FILES = cub3d.c key_event.c free.c init.c draw.c line.c put_tex.c \
+			put_pix.c win_event.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ_DIR = ./obj/
@@ -32,7 +33,7 @@ $(NAME): $(LIBFT) $(OBJS)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJ_DIR)%.o:$(SRCS_DIR)%.c $(CUB_INCLUDE_FILE)
+$(OBJ_DIR)%.o:$(SRCS_DIR)%.c $(CUB_INCLUDE_FILE) Makefile
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(USR_INCLUDE) $(MLX_INCLUDE) $(CUB_INCLUDE) $(LIBFT_INCLUDE) -c $< -o $@
 

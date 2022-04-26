@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:59:44 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/24 21:20:40 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/26 22:48:35 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@
 # define KEY_ARR_LEFT 65361
 # define KEY_ARR_RIGHT 65363
 
-# define RGB_1 0x223240
-# define RGB_2 0x3B8C66
-# define RGB_3 0x347355
-# define RGB_4 0x60BF81
-# define RGB_5 0x93D94E
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 # define RGB_FLOOR 0x07403A
 # define RGB_CEIL 0x58007F
 
@@ -86,6 +85,21 @@ typedef struct s_line
 	int	end;
 }t_line;
 
+typedef struct s_tex
+{
+	void	*img_ptr;
+	char	*img_addr;
+	int		bpp;
+	int		line_len;
+	int		width;
+	int		height;
+	int		endi;
+	int		t_x;
+	int		t_y;
+	double	step;
+	double	tex_pos;
+}t_tex;
+
 typedef struct s_world
 {
 	t_mlx		mlx;
@@ -96,9 +110,12 @@ typedef struct s_world
 	t_map		map_step;
 	t_dist		dist;
 	t_line		line;
+	t_tex		tex[4];
 	int			hit;
 	int			side;
 	int			color;
+	double		wall_x;
+	int			t_side;
 }t_world;
 
 extern int worldMap[MAP_WIDTH][MAP_HEIGHT];
@@ -107,5 +124,9 @@ void	free_world(t_world *world);
 int		key_event(int keycode, void *param);
 void	init(t_world *world);
 void	draw(t_world *world);
+void	put_line(t_world *world, int x);
+void	put_tex(t_world *world, int x, int y, int id);
+void	put_pix(t_world *world, int x, int y, int color);
+int		cross_close(void *param);
 
 #endif
