@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:38:26 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/26 22:51:00 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/27 22:54:54 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	key_event(int keycode, void *param)
 		rotate(param, -0.1);
 	else if (keycode == KEY_ARR_LEFT)
 		rotate(param, 0.1);
-	draw(param);
+	if (keycode == KEY_W || keycode == KEY_D || keycode == KEY_S || \
+	keycode == KEY_A || keycode == KEY_ARR_LEFT || keycode == KEY_ARR_RIGHT)
+		draw(param);
 	return (1);
 }

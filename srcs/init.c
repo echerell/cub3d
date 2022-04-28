@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 22:49:58 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/26 19:50:25 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:16:47 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init(t_world *world)
 	tex_to_img(world, WE, "./textures/redbrick.xpm");
 	tex_to_img(world, EA, "./textures/stone.xpm");
 	world->pos.x = 22;
-	world->pos.y = 12;
+	world->pos.y = 11.5;
 	world->dir.x = 0;
 	world->dir.y = 1;
 	world->camera.plane_x = 0.66;
