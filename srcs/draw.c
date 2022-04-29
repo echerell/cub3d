@@ -6,12 +6,11 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 11:29:57 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/26 23:00:55 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:22:12 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static void	make_delta(t_world *world, int x)
 {
@@ -68,9 +67,9 @@ static void	run_dda(t_world *world)
 			world->map_step.x += world->map_step.step_x;
 			world->side = 0;
 			if (world->ray.x > 0)
-				world->t_side = EA;
+				world->t_side = SO;
 			else
-				world->t_side = WE;
+				world->t_side = NO;
 		}
 		else
 		{
@@ -78,11 +77,11 @@ static void	run_dda(t_world *world)
 			world->map_step.y += world->map_step.step_y;
 			world->side = 1;
 			if (world->ray.y > 0)
-				world->t_side = NO;
+				world->t_side = EA;
 			else
-				world->t_side = SO;
+				world->t_side = WE;
 		}
-		if (worldMap[world->map_step.x][world->map_step.y] > 0)
+		if (world->map[world->map_step.x][world->map_step.y] > 0)
 			world->hit = 1;
 	}
 }
@@ -123,6 +122,5 @@ void	draw(t_world *world)
 				world->mlx.img_ptr, 0, 0);
 	mlx_hook(world->mlx.win_ptr, 2, 1L << 0, &key_event, world);
 	mlx_hook(world->mlx.win_ptr, 17, 0L, &cross_close, world);
-	mlx_hook(world->mlx.win_ptr, 25, 1L<<18, NULL, NULL);
 	mlx_loop(world->mlx.mlx_ptr);
 }

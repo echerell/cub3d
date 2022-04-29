@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 17:31:17 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/26 19:57:48 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/29 12:30:04 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	put_line(t_world *world, int x)
 	tex_prep(world, world->t_side);
 	while (y < world->line.start)
 	{
-		put_pix(world, x, y, RGB_CEIL);
+		put_pix(world, x, y, world->c_col);
 		y++;
 	}
 	while (y >= world->line.start && y <= world->line.end)
@@ -47,7 +47,7 @@ void	put_line(t_world *world, int x)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		put_pix(world, x, y, RGB_FLOOR);
+		put_pix(world, x, y, world->f_col);
 		y++;
 	}
 }

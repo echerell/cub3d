@@ -24,7 +24,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-$(OBJ_DIR)%.o:./%.c $(INCLUDE_FILES)
+$(OBJ_DIR)%.o:./%.c $(INCLUDE_FILES) Makefile
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -c $< -o $@
 

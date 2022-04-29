@@ -10,7 +10,8 @@ USRLIB_FLAGS = -L/usr/lib -lXext -lX11 -lm
 
 SRCS_DIR = ./srcs/
 SRCS_FILES = cub3d.c key_event.c free.c init.c draw.c line.c put_tex.c \
-			put_pix.c win_event.c
+			put_pix.c win_event.c parse.c error.c parse_tools.c parse_tex.c \
+			parse_fc.c check_map.c parse_info.c parse_map.c set_pos.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 OBJ_DIR = ./obj/

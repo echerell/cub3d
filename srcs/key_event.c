@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:38:26 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/27 22:54:54 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/29 18:53:37 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ static void	move(t_world *world, int keycode, double speed)
 	if (keycode == KEY_W || keycode == KEY_S)
 	{
 		val = (int)(world->pos.x + world->dir.x * speed);
-		if (worldMap[val][(int)world->pos.y] == 0)
+		if (world->map[val][(int)world->pos.y] == 0)
 			world->pos.x += world->dir.x * speed;
 		val = (int)(world->pos.y + world->dir.y * speed);
-		if (worldMap[(int)world->pos.x][val] == 0)
+		if (world->map[(int)world->pos.x][val] == 0)
 			world->pos.y += world->dir.y * speed;
 	}
 	else if (keycode == KEY_A || keycode == KEY_D)
 	{
 		val = (int)(world->pos.x + world->camera.plane_x * speed);
-		if (worldMap[val][(int)world->pos.y] == 0)
+		if (world->map[val][(int)world->pos.y] == 0)
 			world->pos.x += world->camera.plane_x * speed;
 		val = (int)(world->pos.y + world->camera.plane_y * speed);
-		if (worldMap[(int)world->pos.x][val] == 0)
+		if (world->map[(int)world->pos.x][val] == 0)
 			world->pos.y += world->camera.plane_y * speed;
 	}
 }
@@ -60,9 +60,9 @@ int	key_event(int keycode, void *param)
 		exit(EXIT_SUCCESS);
 	}
 	else if (keycode == KEY_W || keycode == KEY_D)
-		move(param, keycode, 0.5);
+		move(param, keycode, 0.3);
 	else if (keycode == KEY_S || keycode == KEY_A)
-		move(param, keycode, -0.5);
+		move(param, keycode, -0.3);
 	else if (keycode == KEY_ARR_RIGHT)
 		rotate(param, -0.1);
 	else if (keycode == KEY_ARR_LEFT)

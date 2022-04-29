@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:59:44 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/26 22:48:35 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:27:14 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define CUB3D_H
 
 # include <math.h>
+# include <stdio.h>
+# include <fcntl.h>
 # include "libft.h"
 # include "mlx.h"
+# include "get_next_line.h"
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
-# define MAP_WIDTH 24
-# define MAP_HEIGHT 24
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -34,8 +35,38 @@
 # define SO 1
 # define WE 2
 # define EA 3
-# define RGB_FLOOR 0x07403A
-# define RGB_CEIL 0x58007F
+# define F 0
+# define C 1
+
+enum	e_err
+{
+	DOUB_TEX = -20,
+	MLX_FAIL,
+	TEX_ARG,
+	TEX_FAIL,
+	UNDEF_INFO,
+	DOUB_FC,
+	FC_ARG,
+	FC_RGB,
+	NO_INFO,
+	MAP_SYM,
+	PLAYER_POS,
+	NO_MAP,
+	MAP_WALL,
+	WRG_POS
+};
+
+typedef struct s_parse
+{
+	int	fd;
+	int	info;
+	int	tex[4];
+	int	err;
+	int	tex_id;
+	int	fc[2];
+	int	fc_id;
+	int	p_set;
+}t_parse;
 
 typedef struct s_mlx
 {
@@ -108,25 +139,44 @@ typedef struct s_world
 	t_vector	ray;
 	t_camera	camera;
 	t_map		map_step;
+	int			**map;
+	int			map_width;
+	int			map_height;
 	t_dist		dist;
 	t_line		line;
 	t_tex		tex[4];
 	int			hit;
 	int			side;
 	int			color;
+	int			f_col;
+	int			c_col;
 	double		wall_x;
 	int			t_side;
 }t_world;
 
-extern int worldMap[MAP_WIDTH][MAP_HEIGHT];
-
 void	free_world(t_world *world);
 int		key_event(int keycode, void *param);
-void	init(t_world *world);
+void	init(t_world *world, char *filename);
 void	draw(t_world *world);
 void	put_line(t_world *world, int x);
 void	put_tex(t_world *world, int x, int y, int id);
 void	put_pix(t_world *world, int x, int y, int color);
 int		cross_close(void *param);
+int		check_file(char *str);
+void	parse_file(char *file, t_world *world);
+void	raise_error(int err_type);
+void	free_mat(char **strs);
+int		mat_size(char **strs);
+void	add_tex(char *file, t_world *world, int id, t_parse *parse);
+int		check_tex_type(const char *str, int *tex, int *tex_id);
+int		check_num(char *str);
+void	add_fc_color(char *str, t_world *world, t_parse *parse);
+int		look_around(int **map, int i, int j, int width);
+void	set_pos(char c, int x, int y, t_world *world);
+void	handle_info(char *line, t_parse *parse, t_world *world);
+void	check_wall(int	**map, t_world *world, t_parse *parse);
+int		check_map(char *str, int *p_set, t_world *world);
+void	check_pos(int **map, t_world *world, t_parse *parse);
+int		**make_map(char *line, t_parse *parse, t_world *world);
 
 #endif
