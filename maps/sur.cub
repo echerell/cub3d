@@ -1,0 +1,11 @@
+NO ./textures/mossy.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/stone.xpm
+EA ./textures/wood.xpm
+
+F 100,0,100
+C 0,0,0
+
+111
+1N1
+111

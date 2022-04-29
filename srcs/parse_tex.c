@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/29 11:08:21 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/29 11:09:01 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/29 23:22:43 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@ static int	check_tex_err(int id, int *tex, int *tex_id)
 
 int	check_tex_type(const char *str, int *tex, int *tex_id)
 {
-	if (!ft_strncmp("NO", str, ft_strlen(str)))
+	int	i;
+
+	i = 0;
+	if (str[i] == 'N' && str[i+1] == 'O' && ft_strlen(str) == 2)
 		return (check_tex_err(NO, tex, tex_id));
-	if (!ft_strncmp("SO", str, ft_strlen(str)))
+	if (str[i] == 'S' && str[i+1] == 'O' && ft_strlen(str) == 2)
 		return (check_tex_err(SO, tex, tex_id));
-	if (!ft_strncmp("WE", str, ft_strlen(str)))
+	if (str[i] == 'W' && str[i+1] == 'E' && ft_strlen(str) == 2)
 		return (check_tex_err(WE, tex, tex_id));
-	if (!ft_strncmp("EA", str, ft_strlen(str)))
+	if (str[i] == 'E' && str[i+1] == 'A' && ft_strlen(str) == 2)
 		return (check_tex_err(EA, tex, tex_id));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 11:38:47 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/29 22:21:54 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:50:40 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ static void	read_file(t_parse *parse, t_world *world)
 		free(line);
 		line = NULL;
 	}
+	free(line);
 	if (parse->err || !parse->info)
 		raise_error(NO_INFO);
 	if (!parse->err && parse->info)
 		world->map = make_map(line, parse, world);
-	while (line && get_next_line(parse->fd, &line) > 0)
+	while (get_next_line(parse->fd, &line) > 0)
 	{
 		free(line);
 		line = NULL;

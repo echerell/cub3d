@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-NAME = cub3d
+NAME = cub3D
 
 MLX_INCLUDE = -Imlx_linux
 MLX_FLAGS = -Lmlx_linux -lmlx

@@ -6,7 +6,7 @@
 /*   By: echerell <echerell@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 20:59:44 by echerell          #+#    #+#             */
-/*   Updated: 2022/04/29 22:27:14 by echerell         ###   ########.fr       */
+/*   Updated: 2022/04/30 00:11:19 by echerell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,29 +154,53 @@ typedef struct s_world
 	int			t_side;
 }t_world;
 
+// free all staff
 void	free_world(t_world *world);
+// events for key pressed
 int		key_event(int keycode, void *param);
+// initialization
 void	init(t_world *world, char *filename);
+// main function for drawing world
 void	draw(t_world *world);
+// put vertical line on img
 void	put_line(t_world *world, int x);
+// determine, which texture pixel put on img
 void	put_tex(t_world *world, int x, int y, int id);
+// put pixel function
 void	put_pix(t_world *world, int x, int y, int color);
+// close window on red cross
 int		cross_close(void *param);
+// check file name and extension
 int		check_file(char *str);
+// main function for parcing
 void	parse_file(char *file, t_world *world);
+// print error, if occurs
 void	raise_error(int err_type);
+// free map matrix
 void	free_mat(char **strs);
+// determine length of char** matrix
 int		mat_size(char **strs);
+// open texture file and load to img
 void	add_tex(char *file, t_world *world, int id, t_parse *parse);
+// determine texture world side
 int		check_tex_type(const char *str, int *tex, int *tex_id);
+// check, if rgb is a number in file
 int		check_num(char *str);
+// add floor and ceil color
 void	add_fc_color(char *str, t_world *world, t_parse *parse);
+// check for holes on the map
 int		look_around(int **map, int i, int j, int width);
+// set player position and direction with camera
 void	set_pos(char c, int x, int y, t_world *world);
+// function to check info before map in the file
 void	handle_info(char *line, t_parse *parse, t_world *world);
+// check, if the map is closed
 void	check_wall(int	**map, t_world *world, t_parse *parse);
+// main function for map checking
 int		check_map(char *str, int *p_set, t_world *world);
+// check, if player stand on the right place
 void	check_pos(int **map, t_world *world, t_parse *parse);
+// create int matrix, which represents a map
 int		**make_map(char *line, t_parse *parse, t_world *world);
 
 #endif
